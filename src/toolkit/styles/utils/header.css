@@ -2,23 +2,13 @@
   position: relative;
   flex-wrap: wrap-reverse;
   min-height: 90vh;
-  background: var(--COLOR-PRIMARY-XXLIGHT);
+  background: linear-gradient(white, var(--COLOR-PRIMARY-XXLIGHT), var(--COLOR-PRIMARY-XLIGHT));
   object-fit: cover;
   background-size: cover;
 }
 
 .dark .site-header {
   background: transparent;
-}
-
-.site-header::after {
-  content: "";
-  position: absolute;
-  background: linear-gradient(transparent, white);
-  bottom: 0rem;
-  height: 10rem;
-  width: 100%;
-  z-index: 2;
 }
 
 .introduction {

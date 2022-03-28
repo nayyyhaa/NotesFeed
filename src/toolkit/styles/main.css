@@ -1,13 +1,24 @@
 @import url("utils/font.css");
 @import url("utils/header.css");
-@import url("component/browse-quiz.css");
 @import url("component/login.css");
-@import url("component/quiz-content.css");
+@import url("component/notesfeed.css");
 
 .card-btn:hover,
 .card-icon-btn:hover {
   color: var(--COLOR-PRIMARY);
   background: var(--COLOR-COMPLEMENTARY-XLIGHT);
+}
+
+.quiz-footer {
+  background: var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.note-searchfield {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  border: 2px solid var(--COLOR-PRIMARY-XLIGHT);
 }
 
 .heart-btn {
@@ -39,11 +50,20 @@
   margin-bottom: 2rem;
 }
 
+.nav-icon-btn:last-child {
+  margin-right: 3rem;
+}
 
 /* override mockman styles */
 .title {
   border-bottom: none;
   width: initial;
+}
+
+@media screen and (max-width: 600px) {
+  .field {
+    width: 60%;
+  }
 }
 
 @media screen and (max-width: 400px) {

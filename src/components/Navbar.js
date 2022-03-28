@@ -7,14 +7,17 @@ export const Navbar = () => {
     <>
       <div className="header header-grid fixed-header row-flex">
         <nav className="navbar row-flex">
+          <div class="hamburger icon-toggle icon-btn rd-bdr grid-ctr colored-text m-l-3">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </div>
           <Link className="m-l-3" to="/">
             <h3 className="logo">
-              Note <span className="text-shd">it!</span>
+              Notes<span className="text-shd">feed</span>
             </h3>
           </Link>
-          <ul className={`nav-items row-flex no-bullet ${isNavVisible ? "show-nav" : ""}`}>
-            <li className="btn nav-link-btn h3 m-v-2 m-r-3" onClick={() => setNavVisible(false)}>
-              <Link to="/">Notes</Link>
+          <ul className="nav-items row-flex no-bullet">
+            <li className="btn nav-link-btn h3 m-v-2 m-r-3">
+              <Link to="/notesfeed">Notes</Link>
             </li>
           </ul>
 
@@ -25,12 +28,6 @@ export const Navbar = () => {
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <span className="nav-icon-text h6 cursor wt-text">Profile</span>
               </Link>
-            </li>
-            <li
-              className="hamburger icon-toggle icon-btn rd-bdr grid-ctr colored-text m-r-3"
-              onClick={() => setNavVisible((prev) => !prev)}
-            >
-              <i className={`${isNavVisible ? "fa fa-times" : "fa fa-bars"}`} aria-hidden="true"></i>
             </li>
           </ul>
         </nav>

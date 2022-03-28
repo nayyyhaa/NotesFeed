@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <>
-      <footer className="quiz-footer p-3 m-t-3 row-flex no-wrap">
+      <footer className="quiz-footer p-3 row-flex no-wrap">
         <div className="contact-socials m-v-1 m-r-3">
           <a className="icon-btn footer-icon sub-heading p-1" href="mailto:nehaguptang.ng@gmail.com">
             <i className="fa fa-envelope" title="envelope" alt="envelope"></i>

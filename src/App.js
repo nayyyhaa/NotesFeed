@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Footer, Navbar } from "components";
-import { Homepage } from "pages";
+import { Homepage, NotesFeed } from "pages";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/notesfeed" element={<NotesFeed />} />
       </Routes>
       <Footer />
     </div>
