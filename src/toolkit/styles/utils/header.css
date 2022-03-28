@@ -1,0 +1,50 @@
+.site-header {
+  position: relative;
+  flex-wrap: wrap-reverse;
+  min-height: 90vh;
+  background: var(--COLOR-PRIMARY-XXLIGHT);
+  object-fit: cover;
+  background-size: cover;
+}
+
+.dark .site-header {
+  background: transparent;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(transparent, white);
+  bottom: 0rem;
+  height: 10rem;
+  width: 100%;
+  z-index: 2;
+}
+
+.introduction {
+  margin: 5rem 0;
+}
+
+.site-img {
+  width: 50rem;
+  height: 50rem;
+}
+
+@media screen and (max-width: 600px) {
+  .site-header {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .site-img {
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .navbar {
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,30 @@
+.option {
+  background: var(--COLOR-PRIMARY-XXLIGHT);
+}
+
+.dark .option {
+  background: var(--COLOR-PRIMARY);
+}
+
+.select-option {
+  background: var(--COLOR-PRIMARY-LIGHT);
+}
+
+.dark .select-option {
+  background: var(--COLOR-PRIMARY-XLIGHT);
+  color: var(--COLOR-GREY-DARK);
+}
+
+.card > li {
+  border-radius: 8px;
+}
+
+.questions-heading {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .question-card {
+    width: 95%;
+  }
+}

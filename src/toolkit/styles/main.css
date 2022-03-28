@@ -1,0 +1,46 @@
+@import url("utils/font.css");
+@import url("utils/header.css");
+@import url("component/browse-quiz.css");
+@import url("component/login.css");
+@import url("component/quiz-content.css");
+
+.card-btn:hover,
+.card-icon-btn:hover {
+  color: var(--COLOR-PRIMARY);
+  background: var(--COLOR-COMPLEMENTARY-XLIGHT);
+}
+
+.heart-btn {
+  position: absolute;
+  left: 85%;
+  top: 2%;
+  color: var(--COLOR-COMPLEMENTARY-DARK);
+  background: transparent;
+}
+
+.card-img {
+  height: 30vh;
+}
+
+.games-grid {
+  justify-items: center;
+  background: transparent;
+}
+
+.dark .footer-icon {
+  color: white;
+}
+
+.footer-icon:hover {
+  color: var(--COLOR-COMPLEMENTARY);
+}
+
+.m-b-2 {
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 400px) {
+  .quiz-footer {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,17 @@
+.form-content {
+  background: linear-gradient(to top, white, var(--COLOR-PRIMARY-XLIGHT));
+}
+
+.dark .form-content {
+  background: transparent;
+}
+
+.login-actions {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+  .form-card {
+    width: 100%;
+  }
+}
