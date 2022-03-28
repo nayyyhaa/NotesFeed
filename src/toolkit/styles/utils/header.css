@@ -12,15 +12,28 @@
 }
 
 .introduction {
-  margin: 5rem 0;
+  width: 60rem;
 }
-
 .site-img {
   width: 50rem;
   height: 50rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1150px) {
+  .site-img {
+    width: 35rem;
+    height: 35rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .site-img {
+    width: 32rem;
+    height: 32rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
   .site-header {
     align-items: center;
     justify-content: center;
