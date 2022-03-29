@@ -13,3 +13,7 @@
 .underlined-text {
   text-decoration: underline;
 }
+
+.inherit-color {
+  color: inherit;
+}
