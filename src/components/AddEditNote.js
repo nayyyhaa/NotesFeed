@@ -9,12 +9,12 @@ export const AddEditNote = () => {
   const { modalData, showModal, setModalClose } = useModal();
   const [checkFormValidity, setFormValid] = useState(false);
   const [isColorPickerOpen, setIsColorPicker] = useState(false);
-  const { editmodeon, note } = modalData;
+  const { editModeOn, note } = modalData;
   const { dispatchNote } = useNote();
   const [noteForm, setNoteForm] = useState(note);
   const formRef = useRef();
   const formHandler = () => {
-    dispatchNote({ type: editmodeon ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
+    dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
     setModalClose();
   };
 
@@ -81,7 +81,7 @@ export const AddEditNote = () => {
             )}
           </div>
           <button type="submit" className="btn primary-btn example-modal-close-btn m-1 w-50p">
-            {editmodeon ? "Save" : "Add"} Note
+            {editModeOn ? "Save" : "Add"} Note
           </button>
         </form>
       </div>

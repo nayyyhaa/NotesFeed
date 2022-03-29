@@ -12,11 +12,11 @@ const initialForm = {
 };
 const ModalProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
-  const [modalData, setModelData] = useState({ note: initialForm, editmodeon: false });
-  
-  const setModalOpen = (editmodeon = false, note = initialForm) => {
+  const [modalData, setModelData] = useState({ note: initialForm, editModeOn: false });
+
+  const setModalOpen = (editModeOn = false, note = initialForm) => {
     setShowModal(true);
-    setModelData((prev) => ({ ...prev, note, editmodeon }));
+    setModelData((prev) => ({ ...prev, note, editModeOn }));
   };
 
   const setModalClose = () => setShowModal(false);
