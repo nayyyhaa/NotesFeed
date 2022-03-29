@@ -17,6 +17,52 @@
   font-weight: 400;
 }
 
+.note {
+  border-radius: 1rem;
+  min-height: 12rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: wrap;
+}
+
+.title.note-input,
+.note-input {
+  width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: wrap;
+  border: none;
+  resize: none;
+}
+
+.note-field {
+  width: 90%;
+}
+
+.title.note-input {
+  width: 86%;
+}
+
+.note-input:focus-visible {
+  outline: none;
+}
+
+.note-footer {
+  justify-content: space-between;
+}
+
+.no-note {
+  pointer-events: none;
+  opacity: 0.5;
+  user-select: none;
+}
+
+.note-actions {
+  position: relative;
+}
+
 .side-bar-title {
   justify-content: space-between;
 }
@@ -135,11 +181,6 @@
 }
 
 @media screen and (max-width: 750px) {
-  .card-grid {
-    justify-items: center;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .card {
     width: 96%;
   }

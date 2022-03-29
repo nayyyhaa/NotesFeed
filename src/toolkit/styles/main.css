@@ -2,12 +2,7 @@
 @import url("utils/header.css");
 @import url("component/login.css");
 @import url("component/notesfeed.css");
-
-.card-btn:hover,
-.card-icon-btn:hover {
-  color: var(--COLOR-PRIMARY);
-  background: var(--COLOR-COMPLEMENTARY-XLIGHT);
-}
+@import url("component/color-picker.css");
 
 .quiz-footer {
   background: var(--COLOR-PRIMARY-XLIGHT);
@@ -19,6 +14,33 @@
   background: white;
   border-radius: 4px;
   border: 2px solid var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.modal {
+  overflow-y: scroll;
+}
+
+.modal-close-btn {
+  position: absolute;
+  left: 90%;
+  top: 5%;
+}
+
+.blue-text {
+  color: var(--BLUE);
+}
+
+.yellow-text {
+  color: var(--YELLOW);
+}
+
+.p-t-5 {
+  padding-top: 5rem;
+}
+
+.flex-end {
+  align-self: end;
+  justify-self: end;
 }
 
 .heart-btn {

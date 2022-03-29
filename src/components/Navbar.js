@@ -7,8 +7,8 @@ export const Navbar = () => {
     <>
       <div className="header header-grid fixed-header row-flex">
         <nav className="navbar row-flex">
-          <div class="hamburger icon-toggle icon-btn rd-bdr grid-ctr colored-text m-l-3">
-            <i class="fa fa-bars" aria-hidden="true"></i>
+          <div className="hamburger icon-toggle icon-btn rd-bdr grid-ctr colored-text m-l-3">
+            <i className="fa fa-bars" aria-hidden="true"></i>
           </div>
           <Link className="m-l-3" to="/">
             <h3 className="logo">
