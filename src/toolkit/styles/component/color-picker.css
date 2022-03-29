@@ -1,0 +1,15 @@
+.color-picker-container {
+  position: absolute;
+  min-height: 7rem;
+  min-width: 12rem;
+  bottom: 95%;
+  right: 25%;
+  border-radius: 0.5rem;
+  background: white;
+}
+
+.color {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}

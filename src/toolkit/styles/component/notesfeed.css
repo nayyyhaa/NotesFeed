@@ -59,6 +59,10 @@
   user-select: none;
 }
 
+.note-actions {
+  position: relative;
+}
+
 .side-bar-title {
   justify-content: space-between;
 }

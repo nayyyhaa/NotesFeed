@@ -2,6 +2,7 @@
 @import url("utils/header.css");
 @import url("component/login.css");
 @import url("component/notesfeed.css");
+@import url("component/color-picker.css");
 
 .quiz-footer {
   background: var(--COLOR-PRIMARY-XLIGHT);
@@ -23,6 +24,14 @@
   position: absolute;
   left: 90%;
   top: 5%;
+}
+
+.blue-text {
+  color: var(--BLUE);
+}
+
+.yellow-text {
+  color: var(--YELLOW);
 }
 
 .p-t-5 {

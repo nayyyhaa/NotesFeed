@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPalette, faTag } from "@fortawesome/free-solid-svg-icons";
 import { useNote } from "contexts/NoteContext";
 import { useModal } from "contexts/ModelContext";
+import { ColorPickerContainer } from "./ColorPickerContainer";
 
 export const AddEditNote = () => {
   const { modalData, showModal, setModalClose } = useModal();
   const [checkFormValidity, setFormValid] = useState(false);
+  const [isColorPickerOpen, setIsColorPicker] = useState(false);
   const { editmodeon, note } = modalData;
   const { dispatchNote } = useNote();
   const [noteForm, setNoteForm] = useState(note);
@@ -67,9 +69,16 @@ export const AddEditNote = () => {
               <i className="fa fa-exclamation-circle" aria-hidden="true"></i>Please enter valid input
             </small>
           </div>
-          <div className="actions w-15rm row-flex flex-end p-1">
-            <FontAwesomeIcon icon={faPalette} />
+          <div className="note-actions w-15rm row-flex flex-end p-1">
+            <FontAwesomeIcon
+              icon={faPalette}
+              onClick={() => setIsColorPicker((prev) => !prev)}
+              className={`${noteForm.color}-text`}
+            />
             <FontAwesomeIcon icon={faTag} />
+            {isColorPickerOpen && (
+              <ColorPickerContainer noteForm={noteForm} setNoteForm={setNoteForm} setIsColorPicker={setIsColorPicker} />
+            )}
           </div>
           <button type="submit" className="btn primary-btn example-modal-close-btn m-1 w-50p">
             {editmodeon ? "Save" : "Add"} Note
