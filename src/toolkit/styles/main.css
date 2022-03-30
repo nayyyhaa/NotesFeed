@@ -4,8 +4,12 @@
 @import url("component/notesfeed.css");
 @import url("component/color-picker.css");
 
-.quiz-footer {
+.page-footer {
   background: var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.dark .page-footer {
+  background: transparent;
 }
 
 .note-searchfield {
@@ -18,6 +22,8 @@
 
 .modal {
   overflow-y: scroll;
+  height: 55vh;
+  width: 90%;
 }
 
 .modal-close-btn {
@@ -89,7 +95,7 @@
 }
 
 @media screen and (max-width: 400px) {
-  .quiz-footer {
+  .page-footer {
     flex-wrap: wrap;
   }
 }

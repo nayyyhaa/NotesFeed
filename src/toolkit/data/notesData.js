@@ -4,8 +4,6 @@ const notesData = [
     title: "Note1",
     description: "test description",
     color: "blue",
-    isArchived: false,
-    isRemoved: false,
     createdOn: new Date(),
   },
   {
@@ -13,8 +11,6 @@ const notesData = [
     title: "Note2",
     description: "test description",
     color: "yellow",
-    isArchived: false,
-    isRemoved: false,
     createdOn: new Date(),
   },
   {
@@ -22,8 +18,6 @@ const notesData = [
     title: "Note3",
     description: "test description",
     color: "green",
-    isArchived: false,
-    isRemoved: false,
     createdOn: new Date(),
   },
   {
@@ -31,8 +25,6 @@ const notesData = [
     title: "Note4",
     description: "test description",
     color: "red",
-    isArchived: false,
-    isRemoved: false,
     createdOn: new Date(),
   },
   {
@@ -40,8 +32,6 @@ const notesData = [
     title: "Note5",
     description: "test description",
     color: "yellow",
-    isArchived: false,
-    isRemoved: false,
     createdOn: new Date(),
   },
 ];

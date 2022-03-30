@@ -45,7 +45,7 @@ export const AddEditNote = () => {
             <input
               type="text"
               id="title"
-              className="note-input title h3 p-h-1 m-auto"
+              className="note-input title h3 p-h-1"
               placeholder="Title"
               value={noteForm.title}
               required
@@ -59,7 +59,7 @@ export const AddEditNote = () => {
             <textarea
               type="text"
               id="description"
-              className="note-input m-auto"
+              className="note-input"
               value={noteForm.description}
               required
               placeholder="Type your note description here..."

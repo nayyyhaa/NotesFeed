@@ -6,8 +6,6 @@ const initialForm = {
   title: "",
   description: "",
   color: "blue",
-  isArchived: false,
-  isRemoved: false,
   createdOn: new Date(),
 };
 const ModalProvider = ({ children }) => {

@@ -1,9 +1,14 @@
 import { useModal } from "contexts/ModelContext";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { sidebarData } from "toolkit/data/sidebarData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faHome, faArchive, faTags } from "@fortawesome/free-solid-svg-icons";
 
 export const Sidebar = () => {
   const { setModalOpen } = useModal();
   const [showFilterBar, setShowFilterBar] = useState(true);
+  const location = useLocation();
   return (
     <>
       <div className={`side-bar notefeed-sidebar w-20p ${showFilterBar ? "show-filter" : ""}`}>
@@ -20,22 +25,16 @@ export const Sidebar = () => {
         </div>
         <ul className="sidebar-items no-bullet col-flex flex-start no-wrap p-h-2 m-b-3">
           <li className="line-decoration"></li>
-          <li className="filter-list active-sidebar cursor p-l-2 p-1 full-wd">
-            <i className="fa fa-home" aria-hidden="true"></i>
-            <span className="p-l-1">Home</span>
-          </li>
-          <li className="filter-list cursor p-l-2 p-1 full-wd">
-            <i className="fa fa-tags" aria-hidden="true"></i>
-            <span className="p-l-1">Labels</span>
-          </li>
-          <li className="filter-list cursor p-l-2 p-1 full-wd">
-            <i className="fa fa-archive" aria-hidden="true"></i>
-            <span className="p-l-1">Archives</span>
-          </li>
-          <li className="filter-list cursor p-l-2 p-1 full-wd">
-            <i className="fa fa-trash" aria-hidden="true"></i>
-            <span className="p-l-1">Trash</span>
-          </li>
+          {sidebarData?.map(({ id, title, link, icon }) => (
+            <Link
+              to={link}
+              key={id}
+              className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link ? "active-sidebar" : ""}`}
+            >
+              <FontAwesomeIcon icon={icon} />
+              <span className="p-l-1">{title}</span>
+            </Link>
+          ))}
         </ul>
       </div>
     </>

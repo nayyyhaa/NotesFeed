@@ -35,14 +35,12 @@
   word-wrap: wrap;
   border: none;
   resize: none;
+  border-radius: 1rem;
+  margin: 1rem auto;
 }
 
 .note-field {
   width: 90%;
-}
-
-.title.note-input {
-  width: 86%;
 }
 
 .note-input:focus-visible {
@@ -72,10 +70,23 @@
   font-weight: 600;
   border-radius: 4px;
   margin: 0.5rem;
+  color: var(--COLOR-GREY-DARK);
 }
 
 .filter-list:hover {
   background: var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.dark .filter-list {
+  color: var(--COLOR-OFFWHITE);
+}
+
+.dark .filter-list:hover {
+  background: var(--COLOR-PRIMARY);
+}
+
+.dark small {
+  color: inherit;
 }
 
 .create-btn {

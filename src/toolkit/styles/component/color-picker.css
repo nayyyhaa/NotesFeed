@@ -8,6 +8,10 @@
   background: white;
 }
 
+.dark .color-picker-container {
+  background: var(--COLOR-PRIMARY-XXXDARK);
+}
+
 .color {
   height: 2.5rem;
   width: 2.5rem;
