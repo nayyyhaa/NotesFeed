@@ -5,6 +5,7 @@ const notesData = [
     description: "test description",
     color: "blue",
     createdOn: new Date(),
+    isPinned: false,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const notesData = [
     description: "test description",
     color: "yellow",
     createdOn: new Date(),
+    isPinned: false,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const notesData = [
     description: "test description",
     color: "green",
     createdOn: new Date(),
+    isPinned: false,
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ const notesData = [
     description: "test description",
     color: "red",
     createdOn: new Date(),
+    isPinned: false,
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ const notesData = [
     description: "test description",
     color: "yellow",
     createdOn: new Date(),
+    isPinned: false,
   },
 ];
 

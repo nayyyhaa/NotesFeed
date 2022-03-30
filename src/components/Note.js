@@ -1,6 +1,14 @@
 import { formatDate } from "toolkit/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faTag, faArchive, faPen, faFolderOpen, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faThumbtack,
+  faTrashCan,
+  faTag,
+  faArchive,
+  faPen,
+  faFolderOpen,
+  faRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
 
@@ -14,7 +22,16 @@ export const Note = ({ note }) => {
   return (
     <>
       <div className={`note ${color}-content w-80p`}>
-        <h2>{title}</h2>
+        <div className="note-header row-flex">
+          <h2>{title}</h2>
+          {allNotesIndex > -1 && (
+            <FontAwesomeIcon
+              icon={faThumbtack}
+              title={note.isPinned ? "Unpin" : "Pin"}
+              onClick={() => dispatchNote({ type: "TOGGLE_NOTE_PIN", payload: note })}
+            />
+          )}
+        </div>
         <p className="m-v-1">{description}</p>
         <div className="note-footer row-flex">
           <small className="inherit-color">{formatDate(createdOn)}</small>

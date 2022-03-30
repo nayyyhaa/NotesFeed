@@ -8,8 +8,20 @@ export const AllNotesFeed = () => {
   const { setModalOpen } = useModal();
   return (
     <>
+      {notes?.allNotes?.filter((note) => note.isPinned).length > 0 && (
+        <>
+          <h3 className="title centered-text">Pinned</h3>
+          {notes?.allNotes
+            ?.filter((note) => note.isPinned)
+            .map((note) => (
+              <Note key={note.id} note={note} />
+            ))}
+          <h3 className="title centered-text">Others</h3>
+        </>
+      )}
+
       {notes.allNotes.length !== 0 ? (
-        notes?.allNotes?.map((note) => <Note key={note.id} note={note} />)
+        notes?.allNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note.id} note={note} />)
       ) : (
         <div className="grid-ctr m-v-5">
           <img className="w-30p no-note" src={noNote} alt="no note" />

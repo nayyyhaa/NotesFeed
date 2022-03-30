@@ -7,6 +7,7 @@ const initialForm = {
   description: "",
   color: "blue",
   createdOn: new Date(),
+  isPinned: false,
 };
 const ModalProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
