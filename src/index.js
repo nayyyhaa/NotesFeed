@@ -6,6 +6,7 @@ import App from "./App";
 import { makeServer } from "./server";
 import { NoteProvider } from "contexts/NoteContext";
 import { ModalProvider } from "contexts/ModelContext";
+import { UserProvider } from "contexts/UserContext";
 
 // Call make Server
 makeServer();
@@ -13,11 +14,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <NoteProvider>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
-      </NoteProvider>
+      <UserProvider>
+        <NoteProvider>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </NoteProvider>
+      </UserProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

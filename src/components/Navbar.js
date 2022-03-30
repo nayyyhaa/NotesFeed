@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from "contexts/UserContext";
 
 export const Navbar = () => {
   const [isNavVisible, setNavVisible] = useState(false);
+  const {setUser} = useUser();
+
   return (
     <>
       <div className="header header-grid fixed-header row-flex">
@@ -22,7 +25,12 @@ export const Navbar = () => {
           </ul>
 
           <ul className="row-flex no-bullet">
-            <li className="dark-mode icon-toggle icon-btn rd-bdr grid-ctr colored-text m-r-3"></li>
+            <li
+              className="dark-mode icon-toggle icon-btn rd-bdr grid-ctr colored-text m-r-3"
+              onClick={() => {
+                setUser((prev) => ({ ...prev, isDark: !prev.isDark }));
+              }}
+            ></li>
             <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text m-r-3">
               <Link to="/" className="grid-ctr">
                 <i className="fa fa-user" aria-hidden="true"></i>
