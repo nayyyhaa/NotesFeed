@@ -32,6 +32,10 @@
   top: 5%;
 }
 
+.show-toast {
+  z-index: 1;
+}
+
 .blue-text {
   color: var(--BLUE);
 }

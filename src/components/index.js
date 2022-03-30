@@ -9,3 +9,4 @@ export { ArchivesFeed } from "./ArchivesFeed";
 export { LabelFeed } from "./LabelFeed";
 export { DeletedFeed } from "./DeletedFeed";
 export { AllNotesFeed } from "./AllNotesFeed";
+export { Toast } from "./Toast";

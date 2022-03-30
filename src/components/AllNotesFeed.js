@@ -1,41 +1,78 @@
 import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
+import { useState } from "react";
 import noNote from "toolkit/assets/no-data.svg";
+import { searchNote } from "toolkit/utils";
 import { Note } from "./Note";
 
 export const AllNotesFeed = () => {
   const { notes } = useNote();
+  const [searchInputText, setSearchInputText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const { setModalOpen } = useModal();
+
+  const filteredNotes = searchNote(notes.allNotes, searchText);
   return (
     <>
-      {notes?.allNotes?.filter((note) => note.isPinned).length > 0 && (
-        <>
-          <h3 className="title centered-text">Pinned</h3>
-          {notes?.allNotes
-            ?.filter((note) => note.isPinned)
-            .map((note) => (
-              <Note key={note.id} note={note} />
-            ))}
-          <h3 className="title centered-text">Others</h3>
-        </>
-      )}
+      <div className="notefeed-content-header row-flex p-2 m-t-3">
+        <label className="field note-searchfield w-80p" htmlFor="search-text">
+          <span className="search-icon cursor p-h-1">
+            <i className="fa fa-search" aria-hidden="true"></i>
+          </span>
+          <input
+            type="text"
+            className="input search-nav reset-ip p-05"
+            placeholder="Search here"
+            value={searchInputText}
+            id="search-text"
+            onChange={(e) => setSearchInputText(e.target.value)}
+            onKeyDown={(e) => (e.key === "Enter" ? setSearchText(searchInputText) : "")}
+          />
+        </label>
+        <button className="btn primary-btn" onClick={() => setSearchText(searchInputText)}>
+          Search
+        </button>
+        <i className="fa fa-sliders" aria-hidden="true"></i>
+      </div>
 
-      {notes.allNotes.length !== 0 ? (
-        notes?.allNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note.id} note={note} />)
-      ) : (
+      {searchText && <h2 className="h3 centered-text">Showing results for "{searchText}"</h2>}
+      {searchText && filteredNotes.length < 1 && (
         <div className="grid-ctr m-v-5">
           <img className="w-30p no-note" src={noNote} alt="no note" />
-          <p className="m-t-3">No note found</p>
-          <p>
-            <strong>
-              Start{" "}
-              <span className="colored-text cursor" onClick={() => setModalOpen(false)}>
-                Note-ing!
-              </span>
-            </strong>
-          </p>
+          <p className="m-t-3">No note found for searched text!</p>
         </div>
       )}
+
+      <section className="notefeed-section m-v-3">
+        {filteredNotes?.filter((note) => note.isPinned).length > 0 && (
+          <>
+            <h3 className="title centered-text">Pinned</h3>
+            {filteredNotes
+              ?.filter((note) => note.isPinned)
+              .map((note) => (
+                <Note key={note.id} note={note} />
+              ))}
+            <h3 className="title centered-text">Others</h3>
+          </>
+        )}
+
+        {notes.allNotes.length !== 0 ? (
+          filteredNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note.id} note={note} />)
+        ) : (
+          <div className="grid-ctr m-v-5">
+            <img className="w-30p no-note" src={noNote} alt="no note" />
+            <p className="m-t-3">No note found</p>
+            <p>
+              <strong>
+                Start{" "}
+                <span className="colored-text cursor" onClick={() => setModalOpen(false)}>
+                  Note-ing!
+                </span>
+              </strong>
+            </p>
+          </div>
+        )}
+      </section>
     </>
   );
 };
