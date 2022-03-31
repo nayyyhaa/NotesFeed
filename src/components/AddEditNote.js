@@ -4,6 +4,7 @@ import { faTimes, faPalette, faTag } from "@fortawesome/free-solid-svg-icons";
 import { useNote } from "contexts/NoteContext";
 import { useModal } from "contexts/ModelContext";
 import { ColorPickerContainer } from "./ColorPickerContainer";
+import { useToast } from "contexts/ToastContext";
 
 export const AddEditNote = () => {
   const { modalData, showModal, setModalClose } = useModal();
@@ -12,9 +13,14 @@ export const AddEditNote = () => {
   const { editModeOn, note } = modalData;
   const { dispatchNote } = useNote();
   const [noteForm, setNoteForm] = useState(note);
+  const { dispatchToast } = useToast();
   const formRef = useRef();
   const formHandler = () => {
     dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
+    dispatchToast({
+      type: "SHOW_TOAST",
+      payload: { state: "success", msg: `Note ${editModeOn ? "edited" : "added"} successfully` },
+    });
     setModalClose();
   };
 
@@ -45,7 +51,7 @@ export const AddEditNote = () => {
             <input
               type="text"
               id="title"
-              className="note-input title h3 p-h-1 m-auto"
+              className="note-input title h3 p-h-1"
               placeholder="Title"
               value={noteForm.title}
               required
@@ -59,7 +65,7 @@ export const AddEditNote = () => {
             <textarea
               type="text"
               id="description"
-              className="note-input m-auto"
+              className="note-input"
               value={noteForm.description}
               required
               placeholder="Type your note description here..."

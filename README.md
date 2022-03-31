@@ -1,3 +1,3 @@
-# Note-it!
+# NotesFeed!
 
-**Note it** is a note making app made using React JS.
+**NotesFeed** is a note making app made using React JS.

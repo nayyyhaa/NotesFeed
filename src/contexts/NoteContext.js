@@ -5,7 +5,8 @@ import notesData from "toolkit/data/notesData";
 const NoteContext = createContext();
 
 const NoteProvider = ({ children }) => {
-  const [notes, dispatchNote] = useReducer(noteReducer, notesData ?? []);
+  const [notes, dispatchNote] = useReducer(noteReducer, { allNotes: notesData ?? [], deletedNotes: [], archives: [] });
+
   return <NoteContext.Provider value={{ notes, dispatchNote }}>{children}</NoteContext.Provider>;
 };
 
