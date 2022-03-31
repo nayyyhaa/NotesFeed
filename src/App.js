@@ -10,7 +10,7 @@ function App() {
   const { state, msg } = toast;
 
   return (
-    <div className={user.isDark && "dark"}>
+    <div className={user.isDark ? "dark" : ""}>
       <Toast state={state} msg={msg} />
       <Navbar />
       <Routes>

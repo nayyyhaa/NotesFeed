@@ -34,11 +34,11 @@ export const AddEditNote = () => {
 
   return (
     <>
-      <div className={`modal-wrapper modal-wrapper-example grid-ctr ${showModal && "show-modal"}`}>
+      <div className={`modal-wrapper modal-wrapper-example grid-ctr ${showModal ? "show-modal" : ""}`}>
         <form
           noValidate
           ref={formRef}
-          className={`modal grid-ctr p-t-5 ${checkFormValidity && "form-validated"}`}
+          className={`modal grid-ctr p-t-5 ${checkFormValidity ? "form-validated" : ""}`}
           onSubmit={(e) => validateForm(e)}
         >
           <button
