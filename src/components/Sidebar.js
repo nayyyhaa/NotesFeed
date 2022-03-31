@@ -1,19 +1,24 @@
 import { useModal } from "contexts/ModelContext";
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { sidebarData } from "toolkit/data/sidebarData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faHome, faArchive, faTags } from "@fortawesome/free-solid-svg-icons";
+import { useSidebar } from "contexts/SidebarContext";
 
 export const Sidebar = () => {
   const { setModalOpen } = useModal();
-  const [showFilterBar, setShowFilterBar] = useState(true);
+  const { showFilterBar, setShowFilterBar } = useSidebar();
   const location = useLocation();
   return (
     <>
       <div className={`side-bar notefeed-sidebar w-20p ${showFilterBar ? "show-filter" : ""}`}>
         <div className="side-bar-title title row-flex p-v-4 p-h-3">
-          <button className="btn primary-btn create-btn" onClick={() => setModalOpen(false)}>
+          <button
+            className="btn primary-btn create-btn"
+            onClick={() => {
+              setModalOpen(false);
+              setShowFilterBar(false);
+            }}
+          >
             Create Note
           </button>
           <p
@@ -30,6 +35,7 @@ export const Sidebar = () => {
               to={link}
               key={id}
               className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link ? "active-sidebar" : ""}`}
+              onClick={() => setShowFilterBar(false)}
             >
               <FontAwesomeIcon icon={icon} />
               <span className="p-l-1">{title}</span>
