@@ -26,7 +26,7 @@ export const AllNotesFeed = () => {
             value={searchInputText}
             id="search-text"
             onChange={(e) => setSearchInputText(e.target.value)}
-            onKeyDown={(e) => (e.key === "Enter" ? setSearchText(searchInputText) : "")}
+            onKeyDown={(e) => e.key === "Enter" && setSearchText(searchInputText)}
           />
         </label>
         <button className="btn primary-btn" onClick={() => setSearchText(searchInputText)}>

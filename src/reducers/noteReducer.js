@@ -5,17 +5,11 @@ export const noteReducer = (state, action) => {
         ...state,
         allNotes: [...state.allNotes, { ...action.payload, id: new Date().toLocaleString(), createdOn: new Date() }],
       };
-    case "EDIT_NOTE": {
-      const allNotesIndex = state.allNotes.findIndex((el) => el.id === action.payload.id);
+    case "EDIT_NOTE":
       return {
         ...state,
-        allNotes: [
-          ...state.allNotes.slice(0, allNotesIndex),
-          { ...state.allNotes[allNotesIndex], ...action.payload },
-          ...state.allNotes.slice(allNotesIndex + 1),
-        ],
+        allNotes: state.allNotes.map((note) => (note.id === action.payload.id ? { ...note, ...action.payload } : note)),
       };
-    }
     case "ARCHIVE_NOTE": {
       const archiveNotesIndex = state.archives.findIndex((el) => el.id === action.payload.id);
       return archiveNotesIndex === -1
@@ -56,17 +50,13 @@ export const noteReducer = (state, action) => {
         ...state,
         deletedNotes: [],
       };
-    case "TOGGLE_NOTE_PIN": {
-      const allNotesIndex = state.allNotes.findIndex((el) => el.id === action.payload.id);
+    case "TOGGLE_NOTE_PIN":
       return {
         ...state,
-        allNotes: [
-          ...state.allNotes.slice(0, allNotesIndex),
-          { ...state.allNotes[allNotesIndex], isPinned: !state.allNotes[allNotesIndex].isPinned },
-          ...state.allNotes.slice(allNotesIndex + 1),
-        ],
+        allNotes: state.allNotes.map((note) =>
+          note.id === action.payload.id ? { ...note, isPinned: !note.isPinned } : note
+        ),
       };
-    }
     default:
       return state;
   }

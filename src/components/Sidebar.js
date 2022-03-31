@@ -11,7 +11,7 @@ export const Sidebar = () => {
   const location = useLocation();
   return (
     <>
-      <div className={`side-bar notefeed-sidebar w-20p ${showFilterBar ? "show-filter" : ""}`}>
+      <div className={`side-bar notefeed-sidebar w-20p ${showFilterBar && "show-filter"}`}>
         <div className="side-bar-title title row-flex p-v-4 p-h-3">
           <button className="btn primary-btn create-btn" onClick={() => setModalOpen(false)}>
             Create Note
@@ -29,7 +29,7 @@ export const Sidebar = () => {
             <Link
               to={link}
               key={id}
-              className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link ? "active-sidebar" : ""}`}
+              className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link && "active-sidebar"}`}
             >
               <FontAwesomeIcon icon={icon} />
               <span className="p-l-1">{title}</span>

@@ -23,7 +23,7 @@ export const Toast = ({ state, msg }) => {
     <>
       <div
         className={`toast example-toast ${colorMap[state].color}-content row-flex m-1 p-1 ${
-          toast.isToastVisible ? "show-toast" : ""
+          toast.isToastVisible && "show-toast"
         }`}
       >
         <p className="toast-msg m-r-1">
