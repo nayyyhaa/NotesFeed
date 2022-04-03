@@ -8,7 +8,8 @@
 }
 
 .notefeed-content-header,
-.note-header {
+.note-header,
+.add-tag {
   justify-content: space-between;
 }
 
@@ -74,7 +75,7 @@
   color: var(--COLOR-GREY-DARK);
 }
 
-.filter-list:hover {
+.sidebar-items .filter-list:hover {
   background: var(--COLOR-PRIMARY-XLIGHT);
 }
 

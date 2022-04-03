@@ -7,6 +7,7 @@ const initialForm = {
   description: "",
   color: "blue",
   createdOn: new Date(),
+  label: "Work",
   isPinned: false,
 };
 const ModalProvider = ({ children }) => {

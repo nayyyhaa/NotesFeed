@@ -2,16 +2,23 @@ import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
 import { useState } from "react";
 import noNote from "toolkit/assets/no-data.svg";
-import { searchNote } from "toolkit/utils";
+import { searchNote, sort, getLabelSelected } from "toolkit/utils";
 import { Note } from "./Note";
+import { FilterBox } from "./FilterBox";
+import { useFilter } from "contexts/FilterContext";
 
 export const AllNotesFeed = () => {
   const { notes } = useNote();
   const [searchInputText, setSearchInputText] = useState("");
   const [searchText, setSearchText] = useState("");
   const { setModalOpen } = useModal();
+  const [isFilterOpen, setFilterOpen] = useState(false);
+  const { filter } = useFilter();
+  const { sortBy, labelsSelected } = filter;
+  const sortedData = sort(notes.allNotes, sortBy);
+  const labeledData = getLabelSelected(sortedData, labelsSelected);
+  const filteredNotes = searchNote(labeledData, searchText);
 
-  const filteredNotes = searchNote(notes.allNotes, searchText);
   return (
     <>
       <div className="notefeed-content-header row-flex p-2 m-t-3">
@@ -32,10 +39,13 @@ export const AllNotesFeed = () => {
         <button className="btn primary-btn" onClick={() => setSearchText(searchInputText)}>
           Search
         </button>
-        <i className="fa fa-sliders" aria-hidden="true"></i>
+        <button className="btn primary-btn" onClick={() => setFilterOpen((prev) => !prev)}>
+          <i className="fa fa-sliders" aria-hidden="true"></i>
+        </button>
       </div>
+      {isFilterOpen && <FilterBox setFilterOpen={setFilterOpen} />}
 
-      {searchText && <h2 className="h3 centered-text">Showing results for "{searchText}"</h2>}
+      {searchText && <h2 className="h3 centered-text m-v-2">Showing results for "{searchText}"</h2>}
       {searchText && filteredNotes.length < 1 && (
         <div className="grid-ctr m-v-5">
           <img className="w-30p no-note" src={noNote} alt="no note" />

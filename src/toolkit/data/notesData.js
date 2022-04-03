@@ -5,6 +5,7 @@ const notesData = [
     description: "test description",
     color: "blue",
     createdOn: new Date(),
+    label: "School",
     isPinned: false,
   },
   {
@@ -13,6 +14,7 @@ const notesData = [
     description: "test description",
     color: "yellow",
     createdOn: new Date(),
+    label: "Work",
     isPinned: false,
   },
   {
@@ -21,6 +23,7 @@ const notesData = [
     description: "test description",
     color: "green",
     createdOn: new Date(),
+    label: "School",
     isPinned: false,
   },
   {
@@ -29,6 +32,7 @@ const notesData = [
     description: "test description",
     color: "red",
     createdOn: new Date(),
+    label: "Personal",
     isPinned: false,
   },
   {
@@ -37,6 +41,7 @@ const notesData = [
     description: "test description",
     color: "yellow",
     createdOn: new Date(),
+    label: "Work",
     isPinned: false,
   },
 ];

@@ -11,10 +11,11 @@ export const AddEditNote = () => {
   const [checkFormValidity, setFormValid] = useState(false);
   const [isColorPickerOpen, setIsColorPicker] = useState(false);
   const { editModeOn, note } = modalData;
-  const { dispatchNote } = useNote();
+  const { dispatchNote, labelList } = useNote();
   const [noteForm, setNoteForm] = useState(note);
   const { dispatchToast } = useToast();
   const formRef = useRef();
+
   const formHandler = () => {
     dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
     dispatchToast({
@@ -75,13 +76,27 @@ export const AddEditNote = () => {
               <i className="fa fa-exclamation-circle" aria-hidden="true"></i>Please enter valid input
             </small>
           </div>
-          <div className="note-actions w-15rm row-flex flex-end p-1">
+          <div className="note-actions w-20rm row-flex flex-end p-1">
             <FontAwesomeIcon
               icon={faPalette}
               onClick={() => setIsColorPicker((prev) => !prev)}
               className={`${noteForm.color}-text`}
             />
-            <FontAwesomeIcon icon={faTag} />
+            <label htmlFor="tag-selector" className="note-tagfield w-60p">
+              <span className="cursor p-05">
+                <FontAwesomeIcon icon={faTag} />
+              </span>
+              <select
+                className="tag-selector"
+                name="tag-selector"
+                value={noteForm.label}
+                onChange={(e) => setNoteForm((prev) => ({ ...prev, label: e.target.value }))}
+              >
+                {labelList?.map((label) => (
+                  <option value={label}>{label}</option>
+                ))}
+              </select>
+            </label>
             {isColorPickerOpen && (
               <ColorPickerContainer noteForm={noteForm} setNoteForm={setNoteForm} setIsColorPicker={setIsColorPicker} />
             )}

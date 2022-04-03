@@ -12,13 +12,14 @@ import {
 import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
 import { useToast } from "contexts/ToastContext";
+import { useLocation } from "react-router-dom";
 
 export const Note = ({ note }) => {
   const { setModalOpen } = useModal();
   const { notes, dispatchNote } = useNote();
   const { dispatchToast } = useToast();
-  const { id, title, description, color, createdOn } = note;
-  const allNotesIndex = notes.allNotes.findIndex((el) => el.id === note.id);
+  const { id, title, description, color, label, createdOn } = note;
+  const location = useLocation();
   const archiveNotesIndex = notes.archives.findIndex((el) => el.id === note.id);
   const deletedNotesIndex = notes.deletedNotes.findIndex((el) => el.id === note.id);
   return (
@@ -26,7 +27,7 @@ export const Note = ({ note }) => {
       <div className={`note ${color}-content w-80p`}>
         <div className="note-header row-flex">
           <h2>{title}</h2>
-          {allNotesIndex > -1 && (
+          {location.pathname === "/notesfeed" && (
             <FontAwesomeIcon
               icon={faThumbtack}
               title={note.isPinned ? "Unpin" : "Pin"}
@@ -41,11 +42,11 @@ export const Note = ({ note }) => {
           )}
         </div>
         <p className="m-v-1">{description}</p>
+        <small className={`${color}-bg label-text p-05`}>{label}</small>
         <div className="note-footer row-flex">
           <small className="inherit-color">{formatDate(createdOn)}</small>
           <div className="note-actions w-15rm row-flex">
             <FontAwesomeIcon icon={faPen} onClick={() => setModalOpen(true, note)} title="Edit" />
-            <FontAwesomeIcon icon={faTag} title="Label" />
             <FontAwesomeIcon
               icon={archiveNotesIndex > -1 ? faFolderOpen : faArchive}
               onClick={() => {
