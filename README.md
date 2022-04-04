@@ -4,7 +4,7 @@
 
 ## Preview☀️/🌙
 
-![notesfeed](toolkit/assets/notesfeed.gif)
+![notesfeed](src/toolkit/assets/notesfeed.gif)
 
 ## Features:
 
