@@ -18,7 +18,7 @@ export const AllNotesFeed = () => {
   const sortedData = sort(notes.allNotes, sortBy);
   const labeledData = getLabelSelected(sortedData, labelsSelected);
   const filteredNotes = searchNote(labeledData, searchText);
-
+  console.log(notes, notes.allNotes, sortedData, labeledData, filteredNotes, "data");
   return (
     <>
       <div className="notefeed-content-header row-flex p-v-2 m-t-3">
@@ -46,7 +46,7 @@ export const AllNotesFeed = () => {
       {isFilterOpen && <FilterBox setFilterOpen={setFilterOpen} />}
 
       {searchText && <h2 className="h3 centered-text m-v-2">Showing results for "{searchText}"</h2>}
-      {searchText && filteredNotes.length < 1 && (
+      {searchText && filteredNotes?.length < 1 && (
         <div className="grid-ctr m-v-5">
           <img className="w-30p no-note" src={noNote} alt="no note" />
           <p className="m-t-3">No note found for searched text!</p>
@@ -54,20 +54,20 @@ export const AllNotesFeed = () => {
       )}
 
       <section className="notefeed-section m-v-3">
-        {filteredNotes?.filter((note) => note.isPinned).length > 0 && (
+        {filteredNotes?.length !== 0 && filteredNotes?.filter((note) => note.isPinned).length > 0 && (
           <>
             <h3 className="title centered-text">Pinned</h3>
             {filteredNotes
               ?.filter((note) => note.isPinned)
               .map((note) => (
-                <Note key={note.id} note={note} />
+                <Note key={note._id} note={note} />
               ))}
             <h3 className="title centered-text">Others</h3>
           </>
         )}
 
-        {notes.allNotes.length !== 0 ? (
-          filteredNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note.id} note={note} />)
+        {filteredNotes?.length !== 0 ? (
+          filteredNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note._id} note={note} />)
         ) : (
           <div className="grid-ctr m-v-5">
             <img className="w-30p no-note" src={noNote} alt="no note" />

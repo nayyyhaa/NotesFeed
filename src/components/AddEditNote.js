@@ -11,17 +11,18 @@ export const AddEditNote = () => {
   const [checkFormValidity, setFormValid] = useState(false);
   const [isColorPickerOpen, setIsColorPicker] = useState(false);
   const { editModeOn, note } = modalData;
-  const { dispatchNote, labelList } = useNote();
+  const { dispatchNote, labelList, addNote, updateNote } = useNote();
   const [noteForm, setNoteForm] = useState(note);
   const { dispatchToast } = useToast();
   const formRef = useRef();
 
   const formHandler = () => {
-    dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
-    dispatchToast({
-      type: "SHOW_TOAST",
-      payload: { state: "success", msg: `Note ${editModeOn ? "edited" : "added"} successfully` },
-    });
+    // dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
+    editModeOn? updateNote(noteForm, noteForm._id): addNote(noteForm);
+    // dispatchToast({
+    //   type: "SHOW_TOAST",
+    //   payload: { state: "success", msg: `Note ${editModeOn ? "edited" : "added"} successfully` },
+    // });
     setModalClose();
   };
 
@@ -92,7 +93,9 @@ export const AddEditNote = () => {
               onChange={(e) => setNoteForm((prev) => ({ ...prev, label: e.target.value }))}
             >
               {labelList?.map((label) => (
-                <option value={label}>{label}</option>
+                <option key={label} value={label}>
+                  {label}
+                </option>
               ))}
             </select>
           </label>

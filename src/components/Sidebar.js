@@ -29,10 +29,10 @@ export const Sidebar = () => {
       </div>
       <ul className="sidebar-items no-bullet col-flex flex-start no-wrap p-h-2 m-b-3">
         <li className="line-decoration"></li>
-        {sidebarData?.map(({ id, title, link, icon }) => (
+        {sidebarData?.map(({ _id, title, link, icon }) => (
           <Link
             to={link}
-            key={id}
+            key={_id}
             className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link ? "active-sidebar" : ""}`}
             onClick={() => setShowFilterBar(false)}
           >

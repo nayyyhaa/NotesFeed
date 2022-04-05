@@ -4,10 +4,7 @@ import {
   getAllArchivedNotesHandler,
   restoreFromArchivesHandler,
 } from "./backend/controllers/ArchiveController";
-import {
-  loginHandler,
-  signupHandler,
-} from "./backend/controllers/AuthController";
+import { loginHandler, signupHandler } from "./backend/controllers/AuthController";
 import {
   archiveNoteHandler,
   createNoteHandler,
@@ -34,8 +31,7 @@ export function makeServer({ environment = "development" } = {}) {
       users.forEach((item) =>
         server.create("user", {
           ...item,
-          notes: [],
-          archives: [],
+          notes: { allNotes: [], archives: [], deletedNotes: [] },
         })
       );
     },
@@ -55,14 +51,8 @@ export function makeServer({ environment = "development" } = {}) {
 
       // archive routes (private)
       this.get("/archives", getAllArchivedNotesHandler.bind(this));
-      this.post(
-        "/archives/restore/:noteId",
-        restoreFromArchivesHandler.bind(this)
-      );
-      this.delete(
-        "/archives/delete/:noteId",
-        deleteFromArchivesHandler.bind(this)
-      );
+      this.post("/archives/restore/:noteId", restoreFromArchivesHandler.bind(this));
+      this.delete("/archives/delete/:noteId", deleteFromArchivesHandler.bind(this));
     },
   });
   return server;

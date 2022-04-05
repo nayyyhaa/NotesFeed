@@ -1,5 +1,5 @@
 export const getLabelSelected = (data, labelsSelected) =>
-  labelsSelected.length ? data.filter((it) => labelsSelected.includes(it.label)) : data;
+  labelsSelected.length > 0 && data.length > 0 ? data?.filter((it) => labelsSelected.includes(it.label)) : data;
 
 export const sort = (data, sortBy) => {
   switch (sortBy) {

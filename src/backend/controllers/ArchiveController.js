@@ -22,7 +22,7 @@ export const getAllArchivedNotesHandler = function (schema, request) {
       }
     );
   }
-  return new Response(200, {}, { archives: user.archives });
+  return new Response(200, {}, { notes: user.notes.archives });
 };
 
 /**
@@ -42,9 +42,9 @@ export const deleteFromArchivesHandler = function (schema, request) {
     );
   }
   const { noteId } = request.params;
-  user.archives = user.archives.filter((note) => note._id !== noteId);
+  user.notes.archives = user.notes.archives.filter((note) => note._id !== noteId);
   this.db.users.update({ _id: user._id }, user);
-  return new Response(200, {}, { archives: user.archives });
+  return new Response(200, {}, { notes: user.notes.archives });
 };
 
 /**
@@ -64,9 +64,9 @@ export const restoreFromArchivesHandler = function (schema, request) {
     );
   }
   const { noteId } = request.params;
-  const restoredNote = user.archives.filter((note) => note._id === noteId)[0];
-  user.archives = user.archives.filter((note) => note._id !== noteId);
-  user.notes.push({ ...restoredNote });
+  const restoredNote = user.notes.archives.filter((note) => note._id === noteId)[0];
+  user.notes.archives = user.notes.archives.filter((note) => note._id !== noteId);
+  user.notes.allNotes.push({ ...restoredNote });
   this.db.users.update({ _id: user._id }, user);
-  return new Response(200, {}, { archives: user.archives, notes: user.notes });
+  return new Response(200, {}, { notes: user.notes });
 };

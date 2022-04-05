@@ -10,6 +10,7 @@ import { UserProvider } from "contexts/UserContext";
 import { ToastProvider } from "contexts/ToastContext";
 import { SidebarProvider } from "contexts/SidebarContext";
 import { FilterProvider } from "contexts/FilterContext";
+import { AuthProvider } from "contexts/AuthContext";
 
 // Call make Server
 makeServer();
@@ -17,19 +18,21 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ToastProvider>
-        <UserProvider>
+      <AuthProvider>
+        <ToastProvider>
           <FilterProvider>
-            <NoteProvider>
-              <ModalProvider>
-                <SidebarProvider>
-                  <App />
-                </SidebarProvider>
-              </ModalProvider>
-            </NoteProvider>
+            <UserProvider>
+              <NoteProvider>
+                <ModalProvider>
+                  <SidebarProvider>
+                    <App />
+                  </SidebarProvider>
+                </ModalProvider>
+              </NoteProvider>
+            </UserProvider>
           </FilterProvider>
-        </UserProvider>
-      </ToastProvider>
+        </ToastProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

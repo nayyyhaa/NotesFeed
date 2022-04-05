@@ -26,7 +26,7 @@ export const DeletedFeed = () => {
         )}
       </div>
       {notes.deletedNotes.length !== 0 ? (
-        notes?.deletedNotes?.map((note) => <Note key={note.id} note={note} />)
+        notes?.deletedNotes?.map((note) => <Note key={note._id} note={note} />)
       ) : (
         <div className="grid-ctr m-v-5">
           <img className="w-30p no-note" src={noNote} alt="no note" />

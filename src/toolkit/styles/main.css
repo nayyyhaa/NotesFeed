@@ -24,6 +24,10 @@
   border-radius: 4px;
 }
 
+.w-5rm {
+  width: 5rem;
+}
+
 .modal {
   overflow-y: scroll;
   height: 55vh;
