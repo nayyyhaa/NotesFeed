@@ -4,23 +4,14 @@ import noNote from "toolkit/assets/no-data.svg";
 import { Note } from "./Note";
 
 export const DeletedFeed = () => {
-  const { notes, dispatchNote } = useNote();
+  const { notes, dispatchNote, deleteAllNotes } = useNote();
   const { dispatchToast } = useToast();
   return (
     <section className="notefeed-section m-v-3">
       <div className="row-flex">
         <h2 className="title colored-text centered-text">Deleted Notes</h2>
         {notes.deletedNotes.length !== 0 && (
-          <button
-            className="btn primary-btn"
-            onClick={() => {
-              dispatchNote({ type: "CLEAR_ALL_NOTES" });
-              dispatchToast({
-                type: "SHOW_TOAST",
-                payload: { state: "success", msg: `All notes deleted` },
-              });
-            }}
-          >
+          <button className="btn primary-btn" onClick={deleteAllNotes}>
             Clear all notes
           </button>
         )}

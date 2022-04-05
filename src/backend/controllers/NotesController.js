@@ -81,7 +81,9 @@ export const deleteNoteHandler = function (schema, request) {
       );
     }
     const noteId = request.params.noteId;
-    user.notes = user.notes.allNotes.filter((item) => item._id !== noteId);
+    const deletedNote = user.notes.allNotes.filter((note) => note._id === noteId)[0];
+    user.notes.allNotes = user.notes.allNotes.filter((note) => note._id !== noteId);
+    user.notes.deletedNotes.push({ ...deletedNote });
     this.db.users.update({ _id: user._id }, user);
     return new Response(200, {}, user.notes);
   } catch (error) {
@@ -164,3 +166,5 @@ export const archiveNoteHandler = function (schema, request) {
     );
   }
 };
+
+

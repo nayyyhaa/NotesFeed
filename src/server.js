@@ -12,6 +12,11 @@ import {
   getAllNotesHandler,
   updateNoteHandler,
 } from "./backend/controllers/NotesController";
+import {
+  deleteAllNoteHandler,
+  restoreDeletedNoteHandler,
+  deleteFromDeletedNoteHandler,
+} from "./backend/controllers/DeleteController";
 import { users } from "./backend/db/users";
 
 export function makeServer({ environment = "development" } = {}) {
@@ -52,7 +57,12 @@ export function makeServer({ environment = "development" } = {}) {
       // archive routes (private)
       this.get("/archives", getAllArchivedNotesHandler.bind(this));
       this.post("/archives/restore/:noteId", restoreFromArchivesHandler.bind(this));
-      this.delete("/archives/delete/:noteId", deleteFromArchivesHandler.bind(this));
+      this.delete("/archives/:noteId", deleteFromArchivesHandler.bind(this));
+
+      // delete routes (private)
+      this.delete("/deletednote/deleteall", deleteAllNoteHandler.bind(this));
+      this.delete("/deletednote/:noteId", deleteFromDeletedNoteHandler.bind(this));
+      this.post("/deletednote/restore/:noteId", restoreDeletedNoteHandler.bind(this));
     },
   });
   return server;

@@ -9,14 +9,34 @@ import { BsPin, BsPinFill } from "react-icons/bs";
 
 export const Note = ({ note }) => {
   const { setModalOpen } = useModal();
-  const { notes, dispatchNote } = useNote();
+  const {
+    notes,
+    dispatchNote,
+    deleteNote,
+    archiveNote,
+    unArchiveNote,
+    deleteArchivedNote,
+    permanentDeleteNote,
+    restoreNote,
+  } = useNote();
   const { dispatchToast } = useToast();
   const { _id, title, description, color, label, createdOn } = note;
   const location = useLocation();
   const archiveNotesIndex = notes.archives.findIndex((el) => el._id === note._id);
   const deletedNotesIndex = notes.deletedNotes.findIndex((el) => el._id === note._id);
   const isPenVisible = location.pathname === "/notesfeed" || location.pathname === "/labelfeed";
-
+  const deleteHandler = () => {
+    switch (location.pathname) {
+      case "/archivesfeed":
+        deleteArchivedNote(_id);
+        break;
+      case "/deletedfeed":
+        permanentDeleteNote(_id);
+        break;
+      default:
+        deleteNote(_id);
+    }
+  };
   return (
     <div className={`note ${color}-content p-2 w-60p`}>
       <div className="note-header row-flex">
@@ -40,42 +60,22 @@ export const Note = ({ note }) => {
       <small className={`${color}-bg label-text p-05`}>{label}</small>
       <div className="note-footer row-flex">
         <small className="inherit-color">{formatDate(createdOn)}</small>
-        <div className={`note-actions w-${location.pathname === "/archivesfeed" ? "5" : "10"}rm row-flex`}>
+        <div
+          className={`note-actions w-${
+            location.pathname === "/archivesfeed" || location.pathname === "/deletedfeed" ? "5" : "10"
+          }rm row-flex`}
+        >
           {isPenVisible && <FontAwesomeIcon icon={faPen} onClick={() => setModalOpen(true, note)} title="Edit" />}
-          <FontAwesomeIcon
-            icon={archiveNotesIndex > -1 ? faRotateLeft : faArchive}
-            onClick={() => {
-              dispatchNote({ type: "ARCHIVE_NOTE", payload: note });
-              dispatchToast({
-                type: "SHOW_TOAST",
-                payload: { state: "success", msg: `Note ${archiveNotesIndex > -1 ? "unarchived" : "archived"}` },
-              });
-            }}
-            title={archiveNotesIndex > -1 ? "Unarchive" : "Archive"}
-          />
-          <FontAwesomeIcon
-            icon={faTrashCan}
-            onClick={() => {
-              dispatchNote({ type: "DELETE_NOTE", payload: note });
-              dispatchToast({
-                type: "SHOW_TOAST",
-                payload: { state: "success", msg: `Note deleted` },
-              });
-            }}
-            title="Delete"
-          />
-          {deletedNotesIndex > -1 && (
+          {location.pathname !== "/deletedfeed" && (
             <FontAwesomeIcon
-              icon={faRotateLeft}
-              onClick={() => {
-                dispatchNote({ type: "RESTORE_NOTE", payload: note });
-                dispatchToast({
-                  type: "SHOW_TOAST",
-                  payload: { state: "success", msg: `Note restored` },
-                });
-              }}
-              title="Restore"
+              icon={archiveNotesIndex > -1 ? faRotateLeft : faArchive}
+              onClick={() => (archiveNotesIndex > -1 ? unArchiveNote(_id) : archiveNote(note, _id))}
+              title={archiveNotesIndex > -1 ? "Unarchive" : "Archive"}
             />
+          )}
+          <FontAwesomeIcon icon={faTrashCan} onClick={deleteHandler} title="Delete" />
+          {deletedNotesIndex > -1 && (
+            <FontAwesomeIcon icon={faRotateLeft} onClick={() => restoreNote(_id)} title="Restore" />
           )}
         </div>
       </div>

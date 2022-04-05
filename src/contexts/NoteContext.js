@@ -2,7 +2,17 @@ import { createContext, useReducer, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { noteReducer } from "reducers/noteReducer";
 import notesData from "toolkit/data/notesData";
-import { addNoteService, updateNoteService } from "toolkit/utils";
+import {
+  addNoteService,
+  archiveNoteService,
+  deleteAllNoteService,
+  deleteFromArchiveNoteService,
+  deleteNoteService,
+  permanentDeleteNoteService,
+  restoreFromDeletedNoteService,
+  unArchiveNoteService,
+  updateNoteService,
+} from "toolkit/utils";
 import { useAuth } from "./AuthContext";
 import { useToast } from "./ToastContext";
 import { getLabels } from "toolkit/utils";
@@ -51,8 +61,143 @@ const NoteProvider = ({ children }) => {
       });
     }
   };
+  const archiveNote = async (note, id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await archiveNoteService(auth.token, note, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "success", msg: "Note Archived!" },
+        });
+      } else navigate("/login");
+    } catch (err) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in archiving Note" },
+      });
+    }
+  };
+  const deleteNote = async (id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await deleteNoteService(auth.token, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "Note deleted" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in deleting Note" },
+      });
+    }
+  };
+  const deleteArchivedNote = async (id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await deleteFromArchiveNoteService(auth.token, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "Note deleted" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in deleting Note" },
+      });
+    }
+  };
+  const unArchiveNote = async (id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await unArchiveNoteService(auth.token, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "Note unarchived" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in unarchiving Note" },
+      });
+    }
+  };
+  const permanentDeleteNote = async (id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await permanentDeleteNoteService(auth.token, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "Note deleted" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in deleting Note" },
+      });
+    }
+  };
+  const deleteAllNotes = async () => {
+    try {
+      if (auth.isAuth) {
+        const res = await deleteAllNoteService(auth.token);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "All Notes deleted" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in deleting Note" },
+      });
+    }
+  };
+  const restoreNote = async (id) => {
+    try {
+      if (auth.isAuth) {
+        const res = await restoreFromDeletedNoteService(auth.token, id);
+        dispatchNote({ type: "SET_ALL_NOTES", payload: res });
+        dispatchToast({
+          type: "SHOW_TOAST",
+          payload: { state: "default", msg: "Note restored" },
+        });
+      } else navigate("/login");
+    } catch (e) {
+      dispatchToast({
+        type: "SHOW_TOAST",
+        payload: { state: "error", msg: "Error in restoring Note" },
+      });
+    }
+  };
   return (
-    <NoteContext.Provider value={{ notes, dispatchNote, addNote, updateNote, labelList, setLabelList }}>
+    <NoteContext.Provider
+      value={{
+        notes,
+        dispatchNote,
+        addNote,
+        updateNote,
+        deleteNote,
+        archiveNote,
+        unArchiveNote,
+        deleteArchivedNote,
+        permanentDeleteNote,
+        deleteAllNotes,
+        restoreNote,
+        labelList,
+        setLabelList,
+      }}
+    >
       {children}
     </NoteContext.Provider>
   );
