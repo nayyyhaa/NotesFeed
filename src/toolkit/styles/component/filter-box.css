@@ -1,0 +1,12 @@
+.filter-box {
+  position: relative;
+  border-radius: 1rem;
+}
+
+.dark .filter-box {
+  background: var(--COLOR-PRIMARY-XXXDARK);
+}
+
+.dark .tag-icon {
+  color: var(--COLOR-PRIMARY-DARK)
+}

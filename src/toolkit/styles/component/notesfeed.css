@@ -7,11 +7,9 @@
   grid-gap: 1rem;
 }
 
-.notefeed-content-header,
-.note-header {
-  justify-content: space-between;
+.notefeed-content-header {
+  justify-content: center;
 }
-
 .categories,
 .filter-item {
   font-size: 1.6rem;
@@ -22,7 +20,6 @@
   border-radius: 1rem;
   min-height: 12rem;
   margin: 2rem auto;
-  padding: 1.5rem;
   white-space: pre-wrap;
   word-break: break-word;
   word-wrap: wrap;
@@ -48,7 +45,11 @@
   outline: none;
 }
 
-.note-footer {
+.note-header,
+.add-tag,
+.note-footer,
+.note-footer .note-actions,
+.side-bar-title {
   justify-content: space-between;
 }
 
@@ -62,10 +63,6 @@
   position: relative;
 }
 
-.side-bar-title {
-  justify-content: space-between;
-}
-
 .filter-list {
   font-size: 1.7rem;
   font-weight: 600;
@@ -74,7 +71,7 @@
   color: var(--COLOR-GREY-DARK);
 }
 
-.filter-list:hover {
+.sidebar-items .filter-list:hover {
   background: var(--COLOR-PRIMARY-XLIGHT);
 }
 

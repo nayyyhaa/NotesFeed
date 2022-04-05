@@ -9,6 +9,7 @@ import { ModalProvider } from "contexts/ModelContext";
 import { UserProvider } from "contexts/UserContext";
 import { ToastProvider } from "contexts/ToastContext";
 import { SidebarProvider } from "contexts/SidebarContext";
+import { FilterProvider } from "contexts/FilterContext";
 
 // Call make Server
 makeServer();
@@ -18,13 +19,15 @@ ReactDOM.render(
     <Router>
       <ToastProvider>
         <UserProvider>
-          <NoteProvider>
-            <ModalProvider>
-              <SidebarProvider>
-                <App />
-              </SidebarProvider>
-            </ModalProvider>
-          </NoteProvider>
+          <FilterProvider>
+            <NoteProvider>
+              <ModalProvider>
+                <SidebarProvider>
+                  <App />
+                </SidebarProvider>
+              </ModalProvider>
+            </NoteProvider>
+          </FilterProvider>
         </UserProvider>
       </ToastProvider>
     </Router>

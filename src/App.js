@@ -3,12 +3,15 @@ import { Footer, Navbar, Toast } from "components";
 import { Homepage, NotesFeed } from "pages";
 import { useUser } from "contexts/UserContext";
 import { useToast } from "contexts/ToastContext";
+import { usePageViewTracker } from "toolkit/utils";
 
 function App() {
   const { user } = useUser();
   const { toast } = useToast();
   const { state, msg } = toast;
 
+  usePageViewTracker();
+  
   return (
     <div className={user.isDark ? "dark" : ""}>
       <Toast state={state} msg={msg} />
