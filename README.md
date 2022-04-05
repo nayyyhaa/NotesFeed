@@ -14,6 +14,7 @@
 - Search for a particular note.
 - Archive & restore note.
 - Delete note in seperated folder.
+- Sign in/Sign Up using mock backend (MockBee)
 
 ## Technologies & Concepts used
 
