@@ -131,6 +131,20 @@
   color: var(--COLOR-PRIMARY-DARK);
 }
 
+.note-searchfield,
+.note-tagfield {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  border: 2px solid var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.note-searchfield {
+  width: 62%;
+  margin: 0 3rem 0 5rem;
+}
+
 /*media queries*/
 
 @media screen and (max-width: 1150px) {
@@ -209,6 +223,14 @@
 
   .product-content {
     width: 100%;
+  }
+
+  .note-searchfield {
+    margin: auto;
+  }
+
+  .note, .filter-box {
+    width: 90%;
   }
 }
 

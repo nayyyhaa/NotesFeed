@@ -21,7 +21,7 @@ export const AllNotesFeed = () => {
 
   return (
     <>
-      <div className="notefeed-content-header row-flex p-2 m-t-3">
+      <div className="notefeed-content-header row-flex p-v-2 m-t-3">
         <button className="btn primary-btn" onClick={() => setFilterOpen((prev) => !prev)}>
           <i className="fa fa-sliders" aria-hidden="true"></i>
         </button>
