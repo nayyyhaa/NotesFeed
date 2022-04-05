@@ -6,7 +6,6 @@ export const getNoteService = async (authToken) => {
       headers: { authorization: authToken },
     });
     if (response.status === 200) {
-      console.log(response.data, "yolo");
       return response.data;
     } else {
       throw new Error();
@@ -26,13 +25,12 @@ export const addNoteService = async (authToken, note) => {
       }
     );
     if (response.status === 201) {
-      console.log(response.data, "yo");
       return response.data;
     } else {
       throw new Error();
     }
   } catch (e) {
-    console.log("addToCart : Error in adding product to cart", e);
+    console.log("addToCart : Error in adding note", e);
   }
 };
 
@@ -51,7 +49,7 @@ export const updateNoteService = async (authToken, note, id) => {
       throw new Error();
     }
   } catch (e) {
-    console.log("addToCart : Error in adding product to cart", e);
+    console.log("addToCart : Error in updating note", e);
   }
 };
 

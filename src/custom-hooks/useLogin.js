@@ -20,7 +20,6 @@ export const useLogin = () => {
       setAuth({ token, isAuth: true });
       const notesRes = await getNoteService(token);
       dispatchNote({ type: "SET_ALL_NOTES", payload: notesRes });
-      console.log(notesRes, "res");
       navigate("/");
     } catch (err) {
       dispatchToast({

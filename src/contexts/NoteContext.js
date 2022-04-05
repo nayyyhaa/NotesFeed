@@ -21,10 +21,7 @@ const NoteProvider = ({ children }) => {
     try {
       if (auth.isAuth) {
         const res = await addNoteService(auth.token, note);
-
-        console.log(res, "n");
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
-        console.log(notes, "no");
         dispatchToast({
           type: "SHOW_TOAST",
           payload: { state: "success", msg: "Added Note Successfully!" },
@@ -41,7 +38,6 @@ const NoteProvider = ({ children }) => {
     try {
       if (auth.isAuth) {
         const res = await updateNoteService(auth.token, note, id);
-        console.log(res, "nu");
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",

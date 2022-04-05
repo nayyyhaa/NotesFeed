@@ -15,13 +15,6 @@ function App() {
   const { state, msg } = toast;
   let { dispatchNote } = useNote();
 
-  // useAsync({
-  //   url: "/api/notes",
-  //   actionType: "SET_ALL_NOTES",
-  //   dispatch: dispatchNote,
-  //   payloadType: "notes",
-  // });
-
   usePageViewTracker();
   
   return (

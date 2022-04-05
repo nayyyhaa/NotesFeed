@@ -17,12 +17,7 @@ export const AddEditNote = () => {
   const formRef = useRef();
 
   const formHandler = () => {
-    // dispatchNote({ type: editModeOn ? "EDIT_NOTE" : "ADD_NOTE", payload: noteForm });
     editModeOn? updateNote(noteForm, noteForm._id): addNote(noteForm);
-    // dispatchToast({
-    //   type: "SHOW_TOAST",
-    //   payload: { state: "success", msg: `Note ${editModeOn ? "edited" : "added"} successfully` },
-    // });
     setModalClose();
   };
 

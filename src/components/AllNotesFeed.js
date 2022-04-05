@@ -18,7 +18,6 @@ export const AllNotesFeed = () => {
   const sortedData = sort(notes.allNotes, sortBy);
   const labeledData = getLabelSelected(sortedData, labelsSelected);
   const filteredNotes = searchNote(labeledData, searchText);
-  console.log(notes, notes.allNotes, sortedData, labeledData, filteredNotes, "data");
   return (
     <>
       <div className="notefeed-content-header row-flex p-v-2 m-t-3">
