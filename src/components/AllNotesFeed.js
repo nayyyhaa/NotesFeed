@@ -22,7 +22,10 @@ export const AllNotesFeed = () => {
   return (
     <>
       <div className="notefeed-content-header row-flex p-2 m-t-3">
-        <label className="field note-searchfield w-80p" htmlFor="search-text">
+        <button className="btn primary-btn" onClick={() => setFilterOpen((prev) => !prev)}>
+          <i className="fa fa-sliders" aria-hidden="true"></i>
+        </button>
+        <label className="field note-searchfield" htmlFor="search-text">
           <span className="search-icon cursor p-h-1">
             <i className="fa fa-search" aria-hidden="true"></i>
           </span>
@@ -38,9 +41,6 @@ export const AllNotesFeed = () => {
         </label>
         <button className="btn primary-btn" onClick={() => setSearchText(searchInputText)}>
           Search
-        </button>
-        <button className="btn primary-btn" onClick={() => setFilterOpen((prev) => !prev)}>
-          <i className="fa fa-sliders" aria-hidden="true"></i>
         </button>
       </div>
       {isFilterOpen && <FilterBox setFilterOpen={setFilterOpen} />}

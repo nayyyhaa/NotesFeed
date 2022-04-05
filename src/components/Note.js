@@ -1,18 +1,11 @@
 import { formatDate } from "toolkit/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbtack,
-  faTrashCan,
-  faTag,
-  faArchive,
-  faPen,
-  faFolderOpen,
-  faRotateLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faArchive, faPen, faFolderOpen, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
 import { useToast } from "contexts/ToastContext";
 import { useLocation } from "react-router-dom";
+import { BsPin, BsPinFill } from "react-icons/bs";
 
 export const Note = ({ note }) => {
   const { setModalOpen } = useModal();
@@ -22,69 +15,69 @@ export const Note = ({ note }) => {
   const location = useLocation();
   const archiveNotesIndex = notes.archives.findIndex((el) => el.id === note.id);
   const deletedNotesIndex = notes.deletedNotes.findIndex((el) => el.id === note.id);
+  
   return (
-    <>
-      <div className={`note ${color}-content w-80p`}>
-        <div className="note-header row-flex">
-          <h2>{title}</h2>
-          {location.pathname === "/notesfeed" && (
+    <div className={`note ${color}-content p-2 w-60p`}>
+      <div className="note-header row-flex">
+        <h2>{title}</h2>
+        {location.pathname === "/notesfeed" && (
+          <span
+            title={note.isPinned ? "Unpin" : "Pin"}
+            onClick={() => {
+              dispatchNote({ type: "TOGGLE_NOTE_PIN", payload: note });
+              dispatchToast({
+                type: "SHOW_TOAST",
+                payload: { state: "success", msg: `Note ${note.isPinned ? "unpinned" : "pinned"}` },
+              });
+            }}
+          >
+            {note.isPinned ? <BsPinFill /> : <BsPin />}
+          </span>
+        )}
+      </div>
+      <p className="m-v-1 m-b-3">{description}</p>
+      <small className={`${color}-bg label-text p-05`}>{label}</small>
+      <div className="note-footer row-flex">
+        <small className="inherit-color">{formatDate(createdOn)}</small>
+        <div className="note-actions w-10rm row-flex">
+          <FontAwesomeIcon icon={faPen} onClick={() => setModalOpen(true, note)} title="Edit" />
+          <FontAwesomeIcon
+            icon={archiveNotesIndex > -1 ? faFolderOpen : faArchive}
+            onClick={() => {
+              dispatchNote({ type: "ARCHIVE_NOTE", payload: note });
+              dispatchToast({
+                type: "SHOW_TOAST",
+                payload: { state: "success", msg: `Note ${archiveNotesIndex > -1 ? "unarchived" : "archived"}` },
+              });
+            }}
+            title={archiveNotesIndex > -1 ? "Unarchive" : "Archive"}
+          />
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            onClick={() => {
+              dispatchNote({ type: "DELETE_NOTE", payload: note });
+              dispatchToast({
+                type: "SHOW_TOAST",
+                payload: { state: "success", msg: `Note deleted` },
+              });
+            }}
+            title="Delete"
+          />
+          {deletedNotesIndex > -1 && (
             <FontAwesomeIcon
-              icon={faThumbtack}
-              title={note.isPinned ? "Unpin" : "Pin"}
+              icon={faRotateLeft}
               onClick={() => {
-                dispatchNote({ type: "TOGGLE_NOTE_PIN", payload: note });
+                dispatchNote({ type: "RESTORE_NOTE", payload: note });
                 dispatchToast({
                   type: "SHOW_TOAST",
-                  payload: { state: "success", msg: `Note ${note.isPinned ? "unpinned" : "pinned"}` },
+                  payload: { state: "success", msg: `Note restored` },
                 });
               }}
+              title="Restore"
             />
           )}
         </div>
-        <p className="m-v-1">{description}</p>
-        <small className={`${color}-bg label-text p-05`}>{label}</small>
-        <div className="note-footer row-flex">
-          <small className="inherit-color">{formatDate(createdOn)}</small>
-          <div className="note-actions w-15rm row-flex">
-            <FontAwesomeIcon icon={faPen} onClick={() => setModalOpen(true, note)} title="Edit" />
-            <FontAwesomeIcon
-              icon={archiveNotesIndex > -1 ? faFolderOpen : faArchive}
-              onClick={() => {
-                dispatchNote({ type: "ARCHIVE_NOTE", payload: note });
-                dispatchToast({
-                  type: "SHOW_TOAST",
-                  payload: { state: "success", msg: `Note ${archiveNotesIndex > -1 ? "unarchived" : "archived"}` },
-                });
-              }}
-              title={archiveNotesIndex > -1 ? "Unarchive" : "Archive"}
-            />
-            <FontAwesomeIcon
-              icon={faTrashCan}
-              onClick={() => {
-                dispatchNote({ type: "DELETE_NOTE", payload: note });
-                dispatchToast({
-                  type: "SHOW_TOAST",
-                  payload: { state: "success", msg: `Note deleted` },
-                });
-              }}
-              title="Delete"
-            />
-            {deletedNotesIndex > -1 && (
-              <FontAwesomeIcon
-                icon={faRotateLeft}
-                onClick={() => {
-                  dispatchNote({ type: "RESTORE_NOTE", payload: note });
-                  dispatchToast({
-                    type: "SHOW_TOAST",
-                    payload: { state: "success", msg: `Note restored` },
-                  });
-                }}
-                title="Restore"
-              />
-            )}
-          </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 };

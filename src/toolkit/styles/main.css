@@ -22,12 +22,18 @@
   border: 2px solid var(--COLOR-PRIMARY-XLIGHT);
 }
 
+.note-searchfield {
+  width: 62%;
+  margin: 0 3rem 0 5rem;
+}
+
 .tag-selector {
   border: none;
   outline: none;
 }
 
-.label-text, .dark .label-text {
+.label-text,
+.dark .label-text {
   color: white;
   border-radius: 4px;
 }

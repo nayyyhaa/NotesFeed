@@ -7,12 +7,9 @@
   grid-gap: 1rem;
 }
 
-.notefeed-content-header,
-.note-header,
-.add-tag {
-  justify-content: space-between;
+.notefeed-content-header {
+  justify-content: center;
 }
-
 .categories,
 .filter-item {
   font-size: 1.6rem;
@@ -23,7 +20,6 @@
   border-radius: 1rem;
   min-height: 12rem;
   margin: 2rem auto;
-  padding: 1.5rem;
   white-space: pre-wrap;
   word-break: break-word;
   word-wrap: wrap;
@@ -49,7 +45,11 @@
   outline: none;
 }
 
-.note-footer {
+.note-header,
+.add-tag,
+.note-footer,
+.note-footer .note-actions,
+.side-bar-title {
   justify-content: space-between;
 }
 
@@ -61,10 +61,6 @@
 
 .note-actions {
   position: relative;
-}
-
-.side-bar-title {
-  justify-content: space-between;
 }
 
 .filter-list {
