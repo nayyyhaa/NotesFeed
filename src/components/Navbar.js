@@ -39,7 +39,7 @@ export const Navbar = () => {
             }}
           ></li>
           <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text m-r-3">
-            <Link to={auth.isAuth ? `/profile` : `/login`} className="grid-ctr">
+            <Link to={auth.isAuth ? "/profile" : "/login"} className="grid-ctr">
               <i className="fa fa-user" aria-hidden="true"></i>
               <span className="nav-icon-text h6 cursor wt-text">Profile</span>
             </Link>

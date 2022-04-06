@@ -16,7 +16,7 @@ function App() {
   let { dispatchNote } = useNote();
 
   usePageViewTracker();
-  
+
   return (
     <div className={user.isDark ? "dark" : ""}>
       <Toast state={state} msg={msg} />
@@ -27,9 +27,9 @@ function App() {
         <Route path="/signup" element={<Authorisation />} />
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/notesfeed" element={<NotesFeed />} />
-          <Route path="/labelfeed" element={<NotesFeed />} />
-          <Route path="/deletedfeed" element={<NotesFeed />} />
-          <Route path="/archivesfeed" element={<NotesFeed />} />
+          <Route path="/label-feed" element={<NotesFeed />} />
+          <Route path="/deleted-feed" element={<NotesFeed />} />
+          <Route path="/archives-feed" element={<NotesFeed />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="/mockman" element={<Mockman />} />

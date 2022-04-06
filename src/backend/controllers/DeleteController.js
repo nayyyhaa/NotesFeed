@@ -43,7 +43,7 @@ export const deleteAllNoteHandler = function (schema, request) {
       }
     );
   }
-  user.notes.deletedNotes = user.notes.deletedNotes.filter((note) => note._id === "as");
+  user.notes.deletedNotes = [];
   this.db.users.update({ _id: user._id }, user);
   return new Response(200, {}, user.notes);
 };
@@ -66,7 +66,7 @@ export const restoreDeletedNoteHandler = function (schema, request) {
     );
   }
   const { noteId } = request.params;
-  const restoredNote = user.notes.deletedNotes.filter((note) => note._id === noteId)[0];
+  const restoredNote = user.notes.deletedNotes.find((note) => note._id === noteId);
   user.notes.deletedNotes = user.notes.deletedNotes.filter((note) => note._id !== noteId);
   user.notes.allNotes.push({ ...restoredNote });
   this.db.users.update({ _id: user._id }, user);

@@ -1,11 +1,9 @@
 import { useNote } from "contexts/NoteContext";
-import { useToast } from "contexts/ToastContext";
 import noNote from "toolkit/assets/no-data.svg";
 import { Note } from "./Note";
 
 export const DeletedFeed = () => {
-  const { notes, dispatchNote, deleteAllNotes } = useNote();
-  const { dispatchToast } = useToast();
+  const { notes, deleteAllNotes } = useNote();
   return (
     <section className="notefeed-section m-v-3">
       <div className="row-flex">

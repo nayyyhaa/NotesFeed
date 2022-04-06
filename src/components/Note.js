@@ -1,6 +1,6 @@
 import { formatDate } from "toolkit/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faArchive, faPen, faFolderOpen, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faArchive, faPen, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "contexts/ModelContext";
 import { useNote } from "contexts/NoteContext";
 import { useToast } from "contexts/ToastContext";
@@ -24,13 +24,14 @@ export const Note = ({ note }) => {
   const location = useLocation();
   const archiveNotesIndex = notes.archives.findIndex((el) => el._id === note._id);
   const deletedNotesIndex = notes.deletedNotes.findIndex((el) => el._id === note._id);
-  const isPenVisible = location.pathname === "/notesfeed" || location.pathname === "/labelfeed";
+  const isSmallWidth = location.pathname === "/archives-feed" || location.pathname === "/deleted-feed";
+  const isPenVisible = location.pathname === "/notesfeed" || location.pathname === "/label-feed";
   const deleteHandler = () => {
     switch (location.pathname) {
-      case "/archivesfeed":
+      case "/archives-feed":
         deleteArchivedNote(_id);
         break;
-      case "/deletedfeed":
+      case "/deleted-feed":
         permanentDeleteNote(_id);
         break;
       default:
@@ -60,13 +61,9 @@ export const Note = ({ note }) => {
       <small className={`${color}-bg label-text p-05`}>{label}</small>
       <div className="note-footer row-flex">
         <small className="inherit-color">{formatDate(createdOn)}</small>
-        <div
-          className={`note-actions w-${
-            location.pathname === "/archivesfeed" || location.pathname === "/deletedfeed" ? "5" : "10"
-          }rm row-flex`}
-        >
+        <div className={`note-actions w-${isSmallWidth ? "5" : "10"}rm row-flex`}>
           {isPenVisible && <FontAwesomeIcon icon={faPen} onClick={() => setModalOpen(true, note)} title="Edit" />}
-          {location.pathname !== "/deletedfeed" && (
+          {location.pathname !== "/deleted-feed" && (
             <FontAwesomeIcon
               icon={archiveNotesIndex > -1 ? faRotateLeft : faArchive}
               onClick={() => (archiveNotesIndex > -1 ? unArchiveNote(_id) : archiveNote(note, _id))}
