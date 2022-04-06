@@ -30,7 +30,7 @@ const NoteProvider = ({ children }) => {
   const addNote = async (note) => {
     try {
       if (auth.isAuth) {
-        const res = await addNoteService(auth.token, note);
+        const res = await addNoteService(note);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -47,7 +47,7 @@ const NoteProvider = ({ children }) => {
   const updateNote = async (note, id) => {
     try {
       if (auth.isAuth) {
-        const res = await updateNoteService(auth.token, note, id);
+        const res = await updateNoteService(note, id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -64,7 +64,7 @@ const NoteProvider = ({ children }) => {
   const archiveNote = async (note, id) => {
     try {
       if (auth.isAuth) {
-        const res = await archiveNoteService(auth.token, note, id);
+        const res = await archiveNoteService(note, id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -81,7 +81,7 @@ const NoteProvider = ({ children }) => {
   const deleteNote = async (id) => {
     try {
       if (auth.isAuth) {
-        const res = await deleteNoteService(auth.token, id);
+        const res = await deleteNoteService(id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -98,7 +98,7 @@ const NoteProvider = ({ children }) => {
   const deleteArchivedNote = async (id) => {
     try {
       if (auth.isAuth) {
-        const res = await deleteFromArchiveNoteService(auth.token, id);
+        const res = await deleteFromArchiveNoteService(id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -115,7 +115,7 @@ const NoteProvider = ({ children }) => {
   const unArchiveNote = async (id) => {
     try {
       if (auth.isAuth) {
-        const res = await unArchiveNoteService(auth.token, id);
+        const res = await unArchiveNoteService(id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -132,7 +132,7 @@ const NoteProvider = ({ children }) => {
   const permanentDeleteNote = async (id) => {
     try {
       if (auth.isAuth) {
-        const res = await permanentDeleteNoteService(auth.token, id);
+        const res = await permanentDeleteNoteService(id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -149,7 +149,7 @@ const NoteProvider = ({ children }) => {
   const deleteAllNotes = async () => {
     try {
       if (auth.isAuth) {
-        const res = await deleteAllNoteService(auth.token);
+        const res = await deleteAllNoteService();
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",
@@ -166,7 +166,7 @@ const NoteProvider = ({ children }) => {
   const restoreNote = async (id) => {
     try {
       if (auth.isAuth) {
-        const res = await restoreFromDeletedNoteService(auth.token, id);
+        const res = await restoreFromDeletedNoteService(id);
         dispatchNote({ type: "SET_ALL_NOTES", payload: res });
         dispatchToast({
           type: "SHOW_TOAST",

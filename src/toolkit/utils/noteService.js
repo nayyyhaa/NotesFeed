@@ -1,10 +1,8 @@
-import axios from "axios";
+import axiosIntance from "interceptors/axios.interceptor";
 
-export const getNoteService = async (authToken) => {
+export const getNoteService = async () => {
   try {
-    const response = await axios.get("/api/notes", {
-      headers: { authorization: authToken },
-    });
+    const response = await axiosIntance.get("/api/notes");
     if (response.status === 200) {
       return response.data;
     } else {
@@ -15,15 +13,9 @@ export const getNoteService = async (authToken) => {
   }
 };
 
-export const addNoteService = async (authToken, note) => {
+export const addNoteService = async (note) => {
   try {
-    const response = await axios.post(
-      "/api/notes",
-      { note },
-      {
-        headers: { authorization: authToken },
-      }
-    );
+    const response = await axiosIntance.post("/api/notes", { note });
     if (response.status === 201) {
       return response.data;
     } else {
@@ -34,15 +26,9 @@ export const addNoteService = async (authToken, note) => {
   }
 };
 
-export const updateNoteService = async (authToken, note, id) => {
+export const updateNoteService = async (note, id) => {
   try {
-    const response = await axios.post(
-      `/api/notes/${id}`,
-      { note },
-      {
-        headers: { authorization: authToken },
-      }
-    );
+    const response = await axiosIntance.post(`/api/notes/${id}`, { note });
     if (response.status === 201) {
       return response.data;
     } else {
@@ -53,11 +39,9 @@ export const updateNoteService = async (authToken, note, id) => {
   }
 };
 
-export const deleteNoteService = async (authToken, id) => {
+export const deleteNoteService = async (id) => {
   try {
-    const response = await axios.delete(`/api/notes/${id}`, {
-      headers: { authorization: authToken },
-    });
+    const response = await axiosIntance.delete(`/api/notes/${id}`);
     if (response.status === 200) {
       return response.data;
     } else {
@@ -68,15 +52,9 @@ export const deleteNoteService = async (authToken, id) => {
   }
 };
 
-export const archiveNoteService = async (authToken, note, id) => {
+export const archiveNoteService = async (note, id) => {
   try {
-    const response = await axios.post(
-      `/api/notes/archives/${id}`,
-      { note },
-      {
-        headers: { authorization: authToken },
-      }
-    );
+    const response = await axiosIntance.post(`/api/notes/archives/${id}`, { note });
     if (response.status === 201) {
       return response.data;
     } else {
@@ -87,17 +65,9 @@ export const archiveNoteService = async (authToken, note, id) => {
   }
 };
 
-export const unArchiveNoteService = async (authToken, id) => {
+export const unArchiveNoteService = async (id) => {
   try {
-    const response = await axios.post(
-      `/api/archives/restore/${id}`,
-      {},
-      {
-        headers: { authorization: authToken },
-      }
-    );
-
-    console.log(response, "res un");
+    const response = await axiosIntance.post(`/api/archives/restore/${id}`, {});
     if (response.status === 200) {
       return response.data;
     } else {
@@ -108,12 +78,9 @@ export const unArchiveNoteService = async (authToken, id) => {
   }
 };
 
-export const deleteFromArchiveNoteService = async (authToken, id) => {
+export const deleteFromArchiveNoteService = async (id) => {
   try {
-    const response = await axios.delete(`/api/archives/${id}`, {
-      headers: { authorization: authToken },
-    });
-    console.log(response, "res un");
+    const response = await axiosIntance.delete(`/api/archives/${id}`);
     if (response.status === 200) {
       return response.data;
     } else {
@@ -124,13 +91,9 @@ export const deleteFromArchiveNoteService = async (authToken, id) => {
   }
 };
 
-export const permanentDeleteNoteService = async (authToken, id) => {
+export const permanentDeleteNoteService = async (id) => {
   try {
-    const response = await axios.delete(`/api/deletednote/${id}`, {
-      headers: { authorization: authToken },
-    });
-
-    console.log(response, "res un");
+    const response = await axiosIntance.delete(`/api/deletednote/${id}`);
     if (response.status === 200) {
       return response.data;
     } else {
@@ -141,16 +104,9 @@ export const permanentDeleteNoteService = async (authToken, id) => {
   }
 };
 
-export const deleteAllNoteService = async (authToken) => {
+export const deleteAllNoteService = async () => {
   try {
-    const response = await axios.delete(
-      `/api/deletednote/deleteall`,
-      {
-        headers: { authorization: authToken },
-      }, {}
-    );
-
-    console.log(response, "res un");
+    const response = await axiosIntance.delete(`/api/deletednote/deleteall`, {});
     if (response.status === 200) {
       return response.data;
     } else {
@@ -161,17 +117,9 @@ export const deleteAllNoteService = async (authToken) => {
   }
 };
 
-export const restoreFromDeletedNoteService = async (authToken, id) => {
+export const restoreFromDeletedNoteService = async (id) => {
   try {
-    const response = await axios.post(
-      `/api/deletednote/restore/${id}`,
-      {},
-      {
-        headers: { authorization: authToken },
-      }
-    );
-
-    console.log(response, "res un");
+    const response = await axiosIntance.post(`/api/deletednote/restore/${id}`, {});
     if (response.status === 200) {
       return response.data;
     } else {
