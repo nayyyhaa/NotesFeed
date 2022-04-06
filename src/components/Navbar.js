@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "contexts/UserContext";
 import { useSidebar } from "contexts/SidebarContext";
+import { useAuth } from "contexts/AuthContext";
 
 export const Navbar = () => {
   const { setShowFilterBar } = useSidebar();
   const { setUser } = useUser();
+  const { auth } = useAuth();
   const location = useLocation();
 
   return (
@@ -37,7 +39,7 @@ export const Navbar = () => {
             }}
           ></li>
           <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text m-r-3">
-            <Link to="/" className="grid-ctr">
+            <Link to={auth.isAuth ? "/profile" : "/login"} className="grid-ctr">
               <i className="fa fa-user" aria-hidden="true"></i>
               <span className="nav-icon-text h6 cursor wt-text">Profile</span>
             </Link>

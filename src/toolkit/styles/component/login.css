@@ -1,8 +1,10 @@
-.form-content {
-  background: linear-gradient(to top, white, var(--COLOR-PRIMARY-XLIGHT));
+.login-content,
+.profile-content {
+  background: linear-gradient(white, var(--COLOR-PRIMARY-XXLIGHT), var(--COLOR-PRIMARY-XLIGHT));
 }
 
-.dark .form-content {
+.dark .login-content,
+.dark .profile-content {
   background: transparent;
 }
 
@@ -10,8 +12,19 @@
   justify-content: space-between;
 }
 
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translate(0, 10px);
+}
+
+.form-validated .eye-icon {
+  top: 38%;
+}
+
 @media screen and (max-width: 500px) {
-  .form-card {
+  .login-card {
     width: 100%;
   }
 }

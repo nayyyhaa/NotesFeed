@@ -10,9 +10,9 @@ export const NotesFeed = () => {
       <Sidebar />
       <main className="notefeed-content p-h-5">
         {location.pathname === "/notesfeed" && <AllNotesFeed />}
-        {location.pathname === "/labelfeed" && <LabelFeed />}
-        {location.pathname === "/deletedfeed" && <DeletedFeed />}
-        {location.pathname === "/archivesfeed" && <ArchivesFeed />}
+        {location.pathname === "/label-feed" && <LabelFeed />}
+        {location.pathname === "/deleted-feed" && <DeletedFeed />}
+        {location.pathname === "/archives-feed" && <ArchivesFeed />}
       </main>
       {showModal ? <AddEditNote /> : null}
     </div>

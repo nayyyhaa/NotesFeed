@@ -23,7 +23,7 @@ export const getAllNotesHandler = function (schema, request) {
       }
     );
   }
-  return new Response(200, {}, { notes: user.notes });
+  return new Response(200, {}, user.notes);
 };
 
 /**
@@ -45,13 +45,13 @@ export const createNoteHandler = function (schema, request) {
       );
     }
     const { note } = JSON.parse(request.requestBody);
-    if (!note.tags) {
-      user.notes.push({ ...note, _id: uuid(), tags: [] });
+    if (!note.label) {
+      user.notes.allNotes.push({ ...note, _id: uuid(), label: "" });
     } else {
-      user.notes.push({ ...note, _id: uuid() });
+      user.notes.allNotes.push({ ...note, _id: uuid() });
     }
     this.db.users.update({ _id: user._id }, user);
-    return new Response(201, {}, { notes: user.notes });
+    return new Response(201, {}, user.notes);
   } catch (error) {
     return new Response(
       500,
@@ -81,9 +81,11 @@ export const deleteNoteHandler = function (schema, request) {
       );
     }
     const noteId = request.params.noteId;
-    user.notes = user.notes.filter((item) => item._id !== noteId);
+    const deletedNote = user.notes.allNotes.filter((note) => note._id === noteId)[0];
+    user.notes.allNotes = user.notes.allNotes.filter((note) => note._id !== noteId);
+    user.notes.deletedNotes.push({ ...deletedNote });
     this.db.users.update({ _id: user._id }, user);
-    return new Response(200, {}, { notes: user.notes });
+    return new Response(200, {}, user.notes);
   } catch (error) {
     return new Response(
       500,
@@ -115,10 +117,10 @@ export const updateNoteHandler = function (schema, request) {
     }
     const { note } = JSON.parse(request.requestBody);
     const { noteId } = request.params;
-    const noteIndex = user.notes.findIndex((note) => note._id === noteId);
-    user.notes[noteIndex] = { ...user.notes[noteIndex], ...note };
+    const noteIndex = user.notes.allNotes.findIndex((note) => note._id === noteId);
+    user.notes.allNotes[noteIndex] = { ...user.notes.allNotes[noteIndex], ...note };
     this.db.users.update({ _id: user._id }, user);
-    return new Response(201, {}, { notes: user.notes });
+    return new Response(201, {}, user.notes);
   } catch (error) {
     return new Response(
       500,
@@ -149,15 +151,11 @@ export const archiveNoteHandler = function (schema, request) {
       );
     }
     const { noteId } = request.params;
-    const archivedNote = user.notes.filter((note) => note._id === noteId)[0];
-    user.notes = user.notes.filter((note) => note._id !== noteId);
-    user.archives.push({ ...archivedNote });
+    const archivedNote = user.notes.allNotes.filter((note) => note._id === noteId)[0];
+    user.notes.allNotes = user.notes.allNotes.filter((note) => note._id !== noteId);
+    user.notes.archives.push({ ...archivedNote });
     this.db.users.update({ _id: user._id }, user);
-    return new Response(
-      201,
-      {},
-      { archives: user.archives, notes: user.notes }
-    );
+    return new Response(201, {}, user.notes);
   } catch (error) {
     return new Response(
       500,
@@ -168,3 +166,5 @@ export const archiveNoteHandler = function (schema, request) {
     );
   }
 };
+
+

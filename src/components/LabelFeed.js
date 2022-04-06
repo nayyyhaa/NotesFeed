@@ -23,7 +23,7 @@ export const LabelFeed = () => {
           <div key={label}>
             <h2 className="w-60p m-auto h3 p-v-2">{notes?.allNotes.some((note) => note.label === label) && label}</h2>
             {notes.allNotes.length !== 0
-              ? notes?.allNotes?.map((note) => note.label === label && <Note key={note.id} note={note} />)
+              ? notes?.allNotes?.map((note) => note.label === label && <Note key={note._id} note={note} />)
               : noLabel && (
                   <div className="grid-ctr m-v-5">
                     <img className="w-30p no-note" src={noNote} alt="no note" />
