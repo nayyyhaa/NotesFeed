@@ -68,18 +68,22 @@ export const AllNotesFeed = () => {
         {filteredNotes?.length !== 0 ? (
           filteredNotes?.filter((note) => !note.isPinned).map((note) => <Note key={note._id} note={note} />)
         ) : (
-          <div className="grid-ctr m-v-5">
-            <img className="w-30p no-note" src={noNote} alt="no note" />
-            <p className="m-t-3">No note found</p>
-            <p>
-              <strong>
-                Start{" "}
-                <span className="colored-text cursor" onClick={() => setModalOpen(false)}>
-                  Note-ing!
-                </span>
-              </strong>
-            </p>
-          </div>
+          <>
+            {!searchText && (
+              <div className="grid-ctr m-v-5">
+                <img className="w-30p no-note" src={noNote} alt="no note" />
+                <p className="m-t-3">No note found</p>
+                <p>
+                  <strong>
+                    Start{" "}
+                    <span className="colored-text cursor" onClick={() => setModalOpen(false)}>
+                      Note-ing!
+                    </span>
+                  </strong>
+                </p>
+              </div>
+            )}
+          </>
         )}
       </section>
     </>

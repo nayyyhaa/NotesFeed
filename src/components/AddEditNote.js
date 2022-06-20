@@ -15,7 +15,7 @@ export const AddEditNote = () => {
   const formRef = useRef();
 
   const formHandler = () => {
-    editModeOn ? updateNote(noteForm, noteForm._id) : addNote(noteForm);
+    editModeOn ? updateNote(noteForm, noteForm._id) : addNote({ ...noteForm, createdOn: new Date() });
     setModalClose();
   };
 

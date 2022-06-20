@@ -41,7 +41,7 @@ export const Note = ({ note }) => {
   return (
     <div className={`note ${color}-content p-2 w-60p`}>
       <div className="note-header row-flex">
-        <h2 className="w-95p">{title}</h2>
+        <h2 className="w-90p">{title}</h2>
         {location.pathname === "/notesfeed" && (
           <span
             title={note.isPinned ? "Unpin" : "Pin"}

@@ -4,9 +4,9 @@ export const getLabelSelected = (data, labelsSelected) =>
 export const sort = (data, sortBy) => {
   switch (sortBy) {
     case "OLDTORECENT":
-      return [...data.sort((el1, el2) => +el1.createdOn - +el2.createdOn)];
+      return [...data.sort((el1, el2) => new Date(el1.createdOn).valueOf() - new Date(el2.createdOn).valueOf())];
     case "RECENTTOOLD":
-      return [...data.sort((el2, el1) => +el1.createdOn - +el2.createdOn)];
+      return [...data.sort((el2, el1) => new Date(el1.createdOn).valueOf() - new Date(el2.createdOn).valueOf())];
     default:
       return data;
   }
